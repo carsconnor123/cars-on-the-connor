@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars on the Connor | Estcourt Used Car Specialists</title>
-    <!-- Tailwind CSS for rapid mobile styling -->
+    <!-- Tailwind CSS for mobile styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Supabase Official JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -13,157 +13,151 @@
     <style>
         body { background-color: #0d0d0d; font-family: system-ui, -apple-system, sans-serif; }
         .orange-grad { background: linear-gradient(135deg, #ff4500 0%, #ff7f50 100%); }
-        .accent-border { border-color: #ff4500; }
     </style>
 </head>
-<body class="text-white antialiased selection:bg-orange-600 selection:text-white">
+<body class="text-white antialiased pb-24">
 
-    <!-- Mobile Navigation Fixed Header -->
+    <!-- Fixed Header -->
     <header class="sticky top-0 z-50 bg-[#141414] border-b border-neutral-800 px-4 py-3 flex justify-between items-center">
         <div class="flex flex-col">
             <span class="text-xl font-black tracking-tight text-white">CARS ON THE <span class="text-orange-500">CONNOR</span></span>
             <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-widest -mt-1">Estcourt · Midlands</span>
         </div>
-        <a href="https://wa.me/27727780555" class="orange-grad text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-orange-900/20">
+        <a href="https://wa.me/27727780555" target="_blank" class="orange-grad text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
             <i class="fab fa-whatsapp text-sm"></i> Chat Now
         </a>
     </header>
 
-    <!-- Main Mobile Content Area -->
-    <main class="pb-24">
+    <!-- Hero Intro -->
+    <section class="px-4 py-6 bg-gradient-to-b from-[#141414] to-[#0d0d0d] text-center">
+        <div class="inline-block bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full px-3 py-1 text-xs font-bold mb-2">
+            100% Inspected Pre-Owned Vehicles
+        </div>
+        <h1 class="text-2xl font-extrabold tracking-tight mb-2">Quality Pre-Owned Vehicles</h1>
+        <p class="text-neutral-400 text-xs max-w-xs mx-auto">Honest business, rigorous inspections, and repeat customers who trust our choices.</p>
+    </section>
+
+    <!-- ================= VIEWS SECTIONS ================= -->
+
+    <!-- STOCK VIEW (Visible by Default) -->
+    <div id="stock-view" class="px-4 block">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-base font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="w-1 h-4 orange-grad rounded-full inline-block"></span> Current Showroom Stock
+            </h2>
+            <span id="stock-count" class="text-[11px] text-neutral-400 bg-neutral-900 px-2 py-0.5 rounded border border-neutral-800">Loading...</span>
+        </div>
         
-        <!-- Hero Section -->
-        <section class="px-4 py-8 bg-gradient-to-b from-[#141414] to-[#0d0d0d] text-center">
-            <div class="inline-block bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full px-3 py-1 text-xs font-bold mb-3">
-                100% Inspected Pre-Owned Vehicles
-            </div>
-            <h1 class="text-3xl font-extrabold tracking-tight mb-3">Find Your Next Quality Drive</h1>
-            <p class="text-neutral-400 text-sm max-w-sm mx-auto">Honest business, rigorous multipoint inspections, and repeat customers who trust our choices blindly.</p>
-        </section>
+        <!-- Dynamic Stock Container -->
+        <div id="stock-container" class="grid grid-cols-1 gap-4">
+            <div class="text-center py-12 text-neutral-500 text-sm">Loading showroom floor...</div>
+        </div>
+    </div>
 
-        <!-- View Router Containers -->
-        <div id="stock-view" class="px-4">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                    <span class="w-1.5 h-5 orange-grad rounded-full inline-block"></span> Current Live Stock
-                </h2>
-                <span id="stock-count" class="text-xs text-neutral-400 bg-neutral-900 px-2 py-1 rounded border border-neutral-800">Loading...</span>
+    <!-- ABOUT VIEW (Hidden by Default) -->
+    <div id="about-view" class="hidden px-4 py-2">
+        <h2 class="text-lg font-extrabold mb-3 flex items-center gap-2"><span class="w-1 h-4 bg-red-600 rounded-full inline-block"></span> Our Promise</h2>
+        <div class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-4 text-xs text-neutral-300">
+            <p>At <strong class="text-white">Cars on the Connor</strong>, we don't just sell cars; we build relationships. We specialize in clean, verified pre-owned vehicles that meet the strict expectations of our clients.</p>
+            <div class="flex items-start gap-3">
+                <i class="fa-solid fa-circle-check text-orange-500 mt-0.5 text-sm"></i>
+                <div><strong class="text-white block mb-0.5">Rigorous Inspection</strong> Every single vehicle on our lot is thoroughly inspected from every mechanical, structural, and cosmetic aspect.</div>
             </div>
-            
-            <!-- Dynamic Stock Cards Grid -->
-            <div id="stock-container" class="grid grid-cols-1 gap-4">
-                <!-- Javascript will inject vehicle cards here dynamically -->
-                <div class="text-center py-12 text-neutral-500 text-sm">Loading cars from showroom floor...</div>
+            <div class="flex items-start gap-3">
+                <i class="fa-solid fa-heart text-red-500 mt-0.5 text-sm"></i>
+                <div><strong class="text-white block mb-0.5">Honest & Trusted Business</strong> Our growth relies entirely on transparency, integrity, and a great team dedicated to serving repeat customers who trust us completely.</div>
             </div>
         </div>
+    </div>
 
-        <!-- About Section View -->
-        <div id="about-view" class="hidden px-4 py-6">
-            <h2 class="text-xl font-extrabold mb-4 flex items-center gap-2"><span class="w-1.5 h-5 bg-red-600 rounded-full inline-block"></span> Our Promise</h2>
-            <div class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-4 text-sm text-neutral-300">
-                <p>At <strong class="text-white">Cars on the Connor</strong>, we don't just move metal; we serve families across the Midlands. We specialize in premium, verified pre-owned vehicles.</p>
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-check text-orange-500 mt-1"></i>
-                    <div><strong class="text-white block">Absolute Inspection</strong> Every car is inspected from every aspect—mechanical, structural, and cosmetic—before it arrives on our floor.</div>
-                </div>
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-heart text-red-500 mt-1"></i>
-                    <div><strong class="text-white block">Built on Trust</strong> Our business lives on honest transactions, high-quality standards, and repeat clients who count on us for every single car choice.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact & Maps Section View -->
-        <div id="contact-view" class="hidden px-4 py-6">
-            <h2 class="text-xl font-extrabold mb-4 flex items-center gap-2"><span class="w-1.5 h-5 bg-orange-500 rounded-full inline-block"></span> Find Us in Estcourt</h2>
-            <div class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-4 mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-orange-500"><i class="fa-solid fa-location-dot"></i></div>
-                    <div>
-                        <span class="text-xs text-neutral-400 block">Dealership Address</span>
-                        <span class="text-sm font-bold text-white">67 Connor Street, Estcourt, Midlands, KZN</span>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-red-500"><i class="fa-solid fa-phone"></i></div>
-                    <div>
-                        <span class="text-xs text-neutral-400 block">Call / WhatsApp Sales</span>
-                        <span class="text-sm font-bold text-white">072 778 0555</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Static Map Block -->
-            <div class="w-full h-56 rounded-xl overflow-hidden border border-neutral-800 shadow-inner">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3489.5496468452176!2d29.8732731!3d-29.0153868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1efc869ca8bdc52b%3A0x6bf735c110140640!2sConnor%20St%2C%20Estcourt%2C%203310!5e0!3m2!1sen!2sza!4v1717282000000!5m2!1sen!2sza" class="w-full h-full border-0 grayscale invert opacity-80" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-
-        <!-- Secret Dashboard Interface (Hidden by default unless URL has #admin) -->
-        <div id="admin-view" class="hidden px-4 py-6">
-            <div class="flex justify-between items-center mb-6 bg-orange-600/10 p-3 rounded-lg border border-orange-500/20">
-                <h2 class="text-lg font-black text-orange-500 flex items-center gap-2"><i class="fa-solid fa-lock"></i> Lot Manager Panel</h2>
-                <button onclick="window.location.hash=''" class="text-xs text-neutral-400 underline">Exit</button>
-            </div>
-            
-            <!-- Add Vehicle Form -->
-            <form id="vehicle-form" class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-3">
-                <h3 class="font-bold text-sm text-white border-b border-neutral-800 pb-2">Upload New Stock Line</h3>
-                <input type="hidden" id="car-id">
+    <!-- CONTACT & MAP VIEW (Hidden by Default) -->
+    <div id="contact-view" class="hidden px-4 py-2">
+        <h2 class="text-lg font-extrabold mb-3 flex items-center gap-2"><span class="w-1 h-4 bg-orange-500 rounded-full inline-block"></span> Find Us in Estcourt</h2>
+        <div class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-3 mb-4 text-xs">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-orange-500"><i class="fa-solid fa-location-dot"></i></div>
                 <div>
-                    <label class="text-[11px] text-neutral-400 block mb-1">Vehicle Title (Make, Model, Spec)</label>
-                    <input type="text" id="car-title" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="e.g. Toyota Starlet 1.5 Xs">
+                    <span class="text-[10px] text-neutral-400 block">Dealership Address</span>
+                    <span class="font-bold text-white">67 Connor Street, Estcourt, Midlands, KZN</span>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="text-[11px] text-neutral-400 block mb-1">Model Year</label>
-                        <input type="number" id="car-year" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="2022">
-                    </div>
-                    <div>
-                        <label class="text-[11px] text-neutral-400 block mb-1">Mileage (kms)</label>
-                        <input type="number" id="car-mileage" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="114000">
-                    </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-red-500"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                    <span class="text-[10px] text-neutral-400 block">Call / WhatsApp Sales</span>
+                    <span class="font-bold text-white">072 778 0555</span>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="text-[11px] text-neutral-400 block mb-1">Color</label>
-                        <input type="text" id="car-color" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="Grey">
-                    </div>
-                    <div>
-                        <label class="text-[11px] text-neutral-400 block mb-1">Transmission</label>
-                        <select id="car-trans" class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500">
-                            <option value="Automatic">Automatic</option>
-                            <option value="Manual">Manual</option>
-                        </select>
-                    </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Google Map Frame -->
+        <div class="w-full h-48 rounded-xl overflow-hidden border border-neutral-800 shadow-lg">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3489.5496468452176!2d29.8732731!3d-29.0153868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1efc869ca8bdc52b%3A0x6bf735c110140640!2sConnor%20St%2C%20Estcourt%2C%203310!5e0!3m2!1sen!2sza!4v1717282000000!5m2!1sen!2sza" class="w-full h-full border-0 grayscale invert opacity-75" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <!-- SECRET ADMIN DASHBOARD (Hidden unless URL has #admin) -->
+    <div id="admin-view" class="hidden px-4 py-2">
+        <div class="flex justify-between items-center mb-4 bg-orange-600/10 p-3 rounded-lg border border-orange-500/20">
+            <h2 class="text-sm font-black text-orange-500 flex items-center gap-2"><i class="fa-solid fa-lock"></i> Lot Manager Active</h2>
+            <button onclick="window.location.hash=''" class="text-[11px] text-neutral-400 underline">Exit Admin</button>
+        </div>
+        
+        <form id="vehicle-form" class="bg-[#141414] border border-neutral-800 p-4 rounded-xl space-y-3">
+            <h3 class="font-bold text-xs text-white border-b border-neutral-800 pb-1.5">Upload New Vehicle Stock</h3>
+            <div>
+                <label class="text-[10px] text-neutral-400 block mb-0.5">Vehicle Name (Make, Model, Spec)</label>
+                <input type="text" id="car-title" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="e.g. Toyota Hilux 2.8 GD-6 Raider">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="text-[10px] text-neutral-400 block mb-0.5">Model Year</label>
+                    <input type="number" id="car-year" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="2023">
                 </div>
                 <div>
-                    <label class="text-[11px] text-neutral-400 block mb-1">Price (ZAR total cash or finance principal)</label>
-                    <input type="number" id="car-price" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="e.g. 215000">
+                    <label class="text-[10px] text-neutral-400 block mb-0.5">Mileage (km)</label>
+                    <input type="number" id="car-mileage" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="45000">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="text-[10px] text-neutral-400 block mb-0.5">Color</label>
+                    <input type="text" id="car-color" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="White">
                 </div>
                 <div>
-                    <label class="text-[11px] text-neutral-400 block mb-1">Vehicle Photo URL Link</label>
-                    <input type="url" id="car-image" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-sm text-white focus:outline-none focus:border-orange-500" placeholder="https://">
+                    <label class="text-[10px] text-neutral-400 block mb-0.5">Transmission</label>
+                    <select id="car-trans" class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500">
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                    </select>
                 </div>
-                <button type="submit" class="w-full orange-grad text-white text-sm font-bold py-2.5 rounded shadow-lg mt-2">Save to Live Website</button>
-            </form>
-        </div>
-    </main>
+            </div>
+            <div>
+                <label class="text-[10px] text-neutral-400 block mb-0.5">Price (ZAR total)</label>
+                <input type="number" id="car-price" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="350000">
+            </div>
+            <div>
+                <label class="text-[10px] text-neutral-400 block mb-0.5">Photo URL Link</label>
+                <input type="url" id="car-image" required class="w-full bg-neutral-900 border border-neutral-800 rounded p-2 text-xs text-white focus:outline-none focus:border-orange-500" placeholder="https://">
+            </div>
+            <button type="submit" class="w-full orange-grad text-white text-xs font-bold py-2.5 rounded shadow-md mt-1">Push Stock Live</button>
+        </form>
+    </div>
 
-    <!-- Mobile Sticky Tab Bar Navigation System -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#141414]/90 backdrop-blur-md border-t border-neutral-800 px-6 py-2 flex justify-between items-center max-w-md mx-auto rounded-t-xl">
-        <button onclick="switchTab('stock')" id="tab-stock" class="flex flex-col items-center gap-1 text-orange-500 font-bold transition-all">
-            <i class="fa-solid fa-car text-lg"></i><span class="text-[10px]">Our Stock</span>
+    <!-- Fixed Mobile Bottom Tab Bar Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#141414]/95 backdrop-blur-md border-t border-neutral-800 px-6 py-2 flex justify-between items-center max-w-md mx-auto rounded-t-xl shadow-2xl">
+        <button onclick="switchTab('stock')" id="tab-stock" class="flex flex-col items-center gap-0.5 text-orange-500 font-bold transition-all">
+            <i class="fa-solid fa-car text-base"></i><span class="text-[9px]">Our Stock</span>
         </button>
-        <button onclick="switchTab('about')" id="tab-about" class="flex flex-col items-center gap-1 text-neutral-400 font-medium transition-all">
-            <i class="fa-solid fa-circle-info text-lg"></i><span class="text-[10px]">About Us</span>
+        <button onclick="switchTab('about')" id="tab-about" class="flex flex-col items-center gap-0.5 text-neutral-400 font-medium transition-all">
+            <i class="fa-solid fa-circle-info text-base"></i><span class="text-[9px]">About Us</span>
         </button>
-        <button onclick="switchTab('contact')" id="tab-contact" class="flex flex-col items-center gap-1 text-neutral-400 font-medium transition-all">
-            <i class="fa-solid fa-map-location-dot text-lg"></i><span class="text-[10px]">Find Us</span>
+        <button onclick="switchTab('contact')" id="tab-contact" class="flex flex-col items-center gap-0.5 text-neutral-400 font-medium transition-all">
+            <i class="fa-solid fa-map-location-dot text-base"></i><span class="text-[9px]">Find Us</span>
         </button>
     </nav>
 
-    <!-- Javascript Execution Link -->
+    <!-- JS Connect Script -->
     <script src="app.js"></script>
 </body>
 </html>
